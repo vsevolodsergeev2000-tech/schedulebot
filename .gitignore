@@ -1,20 +1,50 @@
 # Виртуальное окружение
+.venv/
 venv/
 env/
+ENV/
+
+# Файл с секретами (токен бота)
 .env
 
-# База данных
+# База данных SQLite (файл и журнал)
 *.db
 *.db-journal
+*.sqlite
+*.sqlite3
 
 # Кэш Python
 __pycache__/
 *.py[cod]
 *$py.class
-
-# Файлы IDE
-.vscode/
-.idea/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
 # Логи
 *.log
+
+# Файлы и папки IDE (PyCharm)
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Системные файлы macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Директория сборки / дистрибутивы
+dist/
+build/
+*.egg-info/
+
+# Файлы тестовых данных (если есть)
+test.db
+test.sqlite3
+
+# Папка с временными файлами (если создаёте)
+tmp/
+temp/
