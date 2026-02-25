@@ -3,7 +3,6 @@ from aiogram.filters import Command
 from sqlalchemy import select
 from db import AsyncSessionLocal, Reminder
 from scheduler import add_reminder_job, remove_reminder_job
-from utils import parse_datetime
 from config import settings
 import pytz
 from datetime import datetime
@@ -15,7 +14,7 @@ router = Router()
 async def cmd_start(message: types.Message, db_user):
     await message.answer(
         f"👋 Привет, {db_user.username or 'пользователь'}!\n"
-        "/remind <текст> <ДД.ММ.ГГГГ ЧЧ:ММ> — создать напоминание (время UTC)\n"
+        "/remind <текст> <ДД.ММ.ГГГГ ЧЧ:ММ> — создать напоминание (время МСК)\n"
         "/list — список активных напоминаний\n"
         "/cancel <номер> — отменить напоминание"
     )
