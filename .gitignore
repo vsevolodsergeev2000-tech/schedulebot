@@ -1,0 +1,20 @@
+# Виртуальное окружение
+venv/
+env/
+.env
+
+# База данных
+*.db
+*.db-journal
+
+# Кэш Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Файлы IDE
+.vscode/
+.idea/
+
+# Логи
+*.log
