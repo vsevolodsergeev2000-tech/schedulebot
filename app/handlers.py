@@ -7,6 +7,7 @@ from utils import parse_datetime
 from config import settings
 import pytz
 from datetime import datetime
+from utils import parse_moscow_to_utc, format_moscow_from_utc
 
 router = Router()
 
@@ -30,7 +31,7 @@ async def cmd_remind(message: types.Message, db_user, bot):
     datetime_str = args[2]
 
     try:
-        remind_time = parse_datetime(datetime_str, settings.TIMEZONE)
+        remind_time = parse_moscow_to_utc(datetime_str)
     except ValueError as e:
         await message.answer(f"❌ {e}")
         return
@@ -54,7 +55,7 @@ async def cmd_remind(message: types.Message, db_user, bot):
     add_reminder_job(reminder.id, remind_time, message.chat.id, text, bot)
 
     await message.answer(
-        f"✅ Напоминание установлено на {remind_time.strftime('%d.%m.%Y %H:%M')} UTC\n"
+        f"✅ Напоминание установлено на {format_moscow_from_utc(remind_time)}\n"
         f"ID: {reminder.id}"
     )
 
@@ -74,7 +75,7 @@ async def cmd_list(message: types.Message, db_user):
 
     lines = []
     for idx, rem in enumerate(reminders, 1):
-        lines.append(f"{idx}. ID {rem.id}: {rem.text} — {rem.remind_time.strftime('%d.%m.%Y %H:%M')} UTC")
+        lines.append(f"{idx}. ID {rem.id}: {rem.text} — {format_moscow_from_utc(rem.remind_time)}")
     await message.answer("📋 Ваши активные напоминания:\n" + "\n".join(lines))
 
 @router.message(Command("cancel"))
